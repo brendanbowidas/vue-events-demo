@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+    {{reservation | json}}
+
+    <location v-if="step === 1"></location>
+    <date v-if="step === 2"></date>
+
+
+
+  <template id="location">
+   <h2>location</h2>
+
+    <select v-model="selected">
+        <option v-for="location in locations" v-bind:value="location.id">{{location.name}}</option>
+    </select>
+    <button @click="sendMsg(selected)">submit</button>
+  </template>
+
+  <template id='date'>
+     <h2>date</h2>
+      <select v-model="selected">
+          <option v-for="date in dates" v-bind:value="date.name">{{date.name}}</option>
+      </select>
+      <button @click="setDate(selected)">submit</button>
+  </template>
+
+
+
+  <script src="http://cdn.jsdelivr.net/vue/1.0.13/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.6.0/vue-resource.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
