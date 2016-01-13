@@ -4,35 +4,60 @@
   <meta charset="UTF-8">
   <title>Document</title>
 </head>
+    <link rel="stylesheet" href="style.css">
 <body>
 
-    {{reservation | json}}
+    <h2 v-cloak>Step: {{step}}</h2>
+    <h2 v-cloak>{{reservation | json}}</h2>
 
     <location v-if="step === 1"></location>
     <date v-if="step === 2"></date>
+    <timeslots v-if="step === 3"></timeslots>
+
+    <br/><br/>
+    <button @click="back()">Back</button>
 
 
 
+
+<!-- LOCATIONS TEMPLATE -->
   <template id="location">
    <h2>location</h2>
 
     <select v-model="selected">
-        <option v-for="location in locations" v-bind:value="location.id">{{location.name}}</option>
+        <option v-for="location in locations" :value="location.id">{{location.name}}</option>
     </select>
-    <button @click="sendMsg(selected)">submit</button>
+    <button @click="setLocation(selected)">submit</button>
   </template>
 
+
+
+
+<!--DATES TEMPLATE -->
   <template id='date'>
      <h2>date</h2>
       <select v-model="selected">
-          <option v-for="date in dates" v-bind:value="date.name">{{date.name}}</option>
+          <option v-for="date in dates"  :value="date.name">{{date.name}}</option>
       </select>
       <button @click="setDate(selected)">submit</button>
   </template>
 
 
 
-  <script src="http://cdn.jsdelivr.net/vue/1.0.13/vue.js"></script>
+<!--TIMESLOTS TEMPLATE -->
+    <template id="timeslots">
+        <h2>timeslot</h2>
+        <select v-model="selected">
+            <option v-for="timeslot in timeslots" :value="timeslot.title">{{timeslot.title}}</option>
+        </select>
+        <button @click="setTime(selected)">submit</button>
+    </template>
+
+
+
+
+<!--SCRIPTS-->
+  <script src="http://cdn.jsdelivr.net/vue/1.0.14/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.6.0/vue-resource.js"></script>
   <script src="app.js"></script>
 </body>
